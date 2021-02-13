@@ -1,0 +1,33 @@
+<div fxFlexFill fxLayout="column">
+  <mat-toolbar fxLayoutGap="16px">
+    <span fxFlex>Angular File Picker Directive</span>
+    <mat-slide-toggle [(ngModel)]="_multiple">Multiple</mat-slide-toggle>
+    <button mat-stroked-button color="primary" (click)="_reset()">Reset</button>
+  </mat-toolbar>
+  <div fxFlex>
+    <mat-tab-group>
+      <mat-tab label="Button">
+        <div class="tab-container" fxLayoutAlign="center center">
+          <button #buttonPicker="appFilePicker" mat-raised-button color="primary" appFilePicker [multiple]="_multiple" (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()">
+                    Upload
+          </button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Drop Zone">
+        <div class="tab-container" fxLayoutAlign="center center">
+          <div class="drop-zone-container" fxLayout="column" fxLayoutAlign="center center" appFilePicker #dropZonePicker="appFilePicker" [multiple]="_multiple" (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()">
+            <mat-icon color="primary">add_circle</mat-icon>
+            <span>Drag & Drop Files</span>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <mat-divider></mat-divider>
+    <div>
+      <mat-toolbar>
+        <span>Selected Files!:</span>
+      </mat-toolbar>
+      <app-selected-files-table [files]="_selectedFiles"></app-selected-files-table>
+    </div>
+  </div>
+</div>
